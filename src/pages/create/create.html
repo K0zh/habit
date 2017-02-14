@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-navbar>
+    <!-- <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button> -->
+    <ion-title>버릇</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="createHabit()">
+        <ion-icon name="md-checkmark"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item-group>
+    <ion-item-divider color="light">버릇 제목</ion-item-divider>
+    <ion-item>
+      <ion-input type="text" placeholder="제목" [(ngModel)]="habit.title"></ion-input>
+    </ion-item>
+  </ion-item-group>
+
+  <ion-item-group>
+    <ion-item-divider color="light">반복 요일 선택</ion-item-divider>
+    <ion-item>
+      <ion-label>월요일</ion-label>
+      <ion-checkbox color="primary" [(ngModel)]="habit.mon"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>화요일</ion-label>
+      <ion-checkbox color="primary" [(ngModel)]="habit.tue"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>수요일</ion-label>
+      <ion-checkbox color="primary" [(ngModel)]="habit.wed"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>목요일</ion-label>
+      <ion-checkbox color="primary" [(ngModel)]="habit.thu"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>금요일</ion-label>
+      <ion-checkbox color="primary" [(ngModel)]="habit.fri"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>토요일</ion-label>
+      <ion-checkbox color="primary" [(ngModel)]="habit.sat"></ion-checkbox>
+    </ion-item>
+    <ion-item>
+      <ion-label>일요일</ion-label>
+      <ion-checkbox color="primary" [(ngModel)]="habit.sun"></ion-checkbox>
+    </ion-item>
+  </ion-item-group>
+
+  <ion-item-group>
+    <ion-item-divider color="light">알림 시간</ion-item-divider>
+    <ion-item>
+      <ion-label>시간 선택</ion-label>
+      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A"
+        [(ngModel)]="habit.times"
+        doneText="확인"
+        cancelText="취소">
+      </ion-datetime>
+    </ion-item>
+  </ion-item-group>
+
+  <ion-item-group>
+    <ion-item-divider color="light">푸시 알림</ion-item-divider>
+    <ion-item>
+      <ion-label>푸시 여부를 설정합니다</ion-label>
+      <ion-toggle checked="true" [(ngModel)]="habit.push"></ion-toggle>
+    </ion-item>
+  </ion-item-group>
+
+
+
+</ion-content>

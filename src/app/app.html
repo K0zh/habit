@@ -1,0 +1,26 @@
+<ion-menu [content]="content" swipeEnabled="false" type="overlay">
+
+  <!-- <ion-header>
+    <ion-toolbar>
+      <ion-title>Pages</ion-title>
+    </ion-toolbar>
+  </ion-header> -->
+
+  <ion-content>
+    <ion-list>
+      <ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        <ion-icon name="{{p.icon}}" item-left small></ion-icon>
+        {{p.title}}
+      </ion-item>
+    </ion-list>
+
+    <div style="width: 100%; position:absolute; bottom:20px; text-align: center;">
+      리뷰 남기기 <ion-icon name="ios-arrow-forward" small></ion-icon>
+    </div>
+  </ion-content>
+
+
+
+</ion-menu>
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="true"></ion-nav>

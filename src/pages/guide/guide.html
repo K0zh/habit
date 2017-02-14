@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar>
+    <!-- <button menuToggle *ngIf="!selectedItem">
+      <ion-icon name="menu"></ion-icon>
+    </button> -->
+    <ion-title>버릇</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides pager>
+    <ion-slide>
+      <!-- <img src="assets/img/ica-slidebox-img-4.png" class="slide-image"/> -->
+      <h2 class="slide-title">Ready to Play? 1</h2>
+    </ion-slide>
+
+    <ion-slide>
+      <!-- <img src="assets/img/ica-slidebox-img-4.png" class="slide-image"/> -->
+      <h2 class="slide-title">Ready to Play? 2</h2>
+    </ion-slide>
+
+    <ion-slide>
+      <!-- <img src="assets/img/ica-slidebox-img-4.png" class="slide-image"/> -->
+      <h2 class="slide-title">Ready to Play? 3</h2>
+      <button ion-button large clear icon-right color="primary" (click)="continueTapped()">
+        Continue
+        <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

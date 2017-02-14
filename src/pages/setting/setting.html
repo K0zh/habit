@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>버릇</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-item-group>
+    <ion-item-divider color="light">안내메시지</ion-item-divider>
+    <ion-item>
+      <ion-label>앱 시작시 안내메시지 보기</ion-label>
+      <ion-toggle [(ngModel)]="settings.start" (ngModelChange)="changeSetting()"></ion-toggle>
+    </ion-item>
+  </ion-item-group>
+
+  <ion-item-group>
+    <ion-item-divider color="light">푸시 알림</ion-item-divider>
+    <ion-item>
+      <ion-label>푸시 알림 받지 않기</ion-label>
+      <ion-toggle [(ngModel)]="settings.push" (ngModelChange)="changeSetting()"></ion-toggle>
+    </ion-item>
+  </ion-item-group>
+</ion-content>
