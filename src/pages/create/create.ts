@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+
+import { ListPage } from '../list/list';
 
 
 @Component({
@@ -7,11 +10,13 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'create.html'
 })
 export class CreatePage {
+  list: Array<{}> = [];
   habit: any;
-  key: any;
 
-  constructor(public storage: Storage) {
+  constructor(public navCtrl: NavController, public storage: Storage) {
     this.habit = {
+      key: 0,
+      icon: "",
       title: "",
       mon: false,
       tue: false,
@@ -22,23 +27,21 @@ export class CreatePage {
       sun: false,
       times: "12:00",
       push: true
-    }
-
-    this.storage.get("habitList").then((list) => {
-      if(list === null) {
-        //this.key = 1;
-      } else {
-        //this.key = (list.length + 1);
-      }
-      console.log(this.key);
-      console.log(list);
-    });
+    };
   }
 
   createHabit() {
+    this.storage.get("habitList").then((list) => {
+      if(list !== null) {
+        this.habit.key = (list.length + 1);
+        this.list = list;
+      }
+      this.list.push(this.habit);
+      this.storage.set("habitList", this.list).then(() => {
+        this.navCtrl.push(ListPage);
+      });
+    }).catch(() => {});
     //this.storage.clear();
-    //this.storage.set("habits."+this.key, this.habit);
-    //console.log(this.habit);
   }
 
 }

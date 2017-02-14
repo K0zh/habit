@@ -14,16 +14,16 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let item of habits" (click)="itemTapped($event, item)">
+    <ion-item *ngFor="let item of list" (click)="itemTapped($event, item)">
       <ion-avatar item-left>
         <img src="assets/img/avatar-{{item.icon}}.png">
       </ion-avatar>
       <h2>{{item.title}}</h2>
-      <p>{{item.note}}</p>
-      <ion-note item-right>3:44 pm</ion-note>
+      <p>asdf</p>
+      <ion-note item-right>{{item.times}}</ion-note>
     </ion-item>
 
-    <ion-item *ngIf="!habits">
+    <ion-item *ngIf="!list">
       <h2>버릇을 등록해주세요</h2>
     </ion-item>
   </ion-list>
