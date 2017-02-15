@@ -14,16 +14,16 @@
         <img src="assets/img/avatar-{{detailItem.icon}}.png">
       </ion-avatar>
       <h2>{{detailItem.title}}</h2>
-      <p>{{detailItem.note}}</p>
-      <ion-note item-right>3:44 pm</ion-note>
+      <p>{{detailItem.week}}</p>
+      <ion-note item-right>{{detailItem.times}}</ion-note>
     </ion-item>
     <ion-item>
       <ion-row>
         <ion-col width-50>
-          <button ion-button block>수정</button>
+          <button ion-button block (click)="updateTapped($event, detailItem)">수정</button>
         </ion-col>
         <ion-col width-50>
-          <button ion-button block outline>삭제</button>
+          <button ion-button block outline (click)="deleteHabit()">삭제</button>
         </ion-col>
       </ion-row>
     </ion-item>
@@ -32,7 +32,7 @@
   <ion-list inset style="margin-top:20px;">
     <ion-list-header>
       <p item-left>체크리스트</p>
-      <button ion-button icon-only item-right clear (click)="showPrompt()">
+      <button ion-button icon-only item-right clear (click)="createCheck()">
         <ion-icon name="md-add"></ion-icon>
       </button>
     </ion-list-header>

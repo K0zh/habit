@@ -8,6 +8,7 @@ import { CreatePage } from '../pages/create/create';
 import { DetailPage } from '../pages/detail/detail';
 import { SettingPage } from '../pages/setting/setting';
 import { GuidePage } from '../pages/guide/guide';
+import { UpdatePage } from '../pages/update/update';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { GuidePage } from '../pages/guide/guide';
     CreatePage,
     DetailPage,
     SettingPage,
-    GuidePage
+    GuidePage,
+    UpdatePage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -28,7 +30,8 @@ import { GuidePage } from '../pages/guide/guide';
     CreatePage,
     DetailPage,
     SettingPage,
-    GuidePage
+    GuidePage,
+    UpdatePage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Storage]
 })

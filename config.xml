@@ -2,7 +2,7 @@
 <widget id="com.ionicframework.habit806027" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>버릇</name>
     <description>버릇을 만드세요</description>
-    <author email="breadnine09@gmail.com" href="mailto:breadnine09@gmail.com">브레드나인(09)</author>
+    <author email="breadnine09@gmail.com" href="mailto:breadnine09@gmail.com">breadnine(09)</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />

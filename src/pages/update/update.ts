@@ -2,51 +2,36 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
-import { ListPage } from '../list/list';
-
 
 @Component({
-  selector: 'page-create',
-  templateUrl: 'create.html'
+  selector: 'page-update',
+  templateUrl: 'update.html'
 })
-export class CreatePage {
+export class UpdatePage {
   icons: string[];
   list: Array<{}> = [];
   habit: any;
 
   constructor(
     public navCtrl: NavController,
+    public navParams: NavParams,
     public storage: Storage,
     public loadingCtrl: LoadingController
   ) {
-    this.habit = {
-      key: 0,
-      icon: "",
-      title: "",
-      mon: false,
-      tue: false,
-      wed: false,
-      thu: false,
-      fri: false,
-      sat: false,
-      sun: false,
-      week: "",
-      times: "12:00",
-      push: true
-    };
+    this.habit = navParams.get('item');
     this.icons = ['ts-barbie', 'ts-bopeep', 'ts-bullseye', 'ts-buzz', 'ts-hamm',
     'ts-jessie', 'ts-potatohead', 'ts-rex', 'ts-sarge', 'ts-slinky', 'ts-squeeze',
     'ts-woody'];
   }
 
-  createHabit() {
+  updateHabit() {
     this.storage.get("habitList").then((list) => {
       if(list !== null) {
-        this.habit.key = (list.length + 1);
         this.list = list;
       }
-
       this.habit.icon = this.icons[Math.floor(Math.random() * this.icons.length)];
+
+      this.habit.week = "";
       if(this.habit.mon === true) { this.habit.week += "월 "; }
       if(this.habit.tue === true) { this.habit.week += "화 "; }
       if(this.habit.wed === true) { this.habit.week += "수 "; }
@@ -54,7 +39,7 @@ export class CreatePage {
       if(this.habit.fri === true) { this.habit.week += "금 "; }
       if(this.habit.sat === true) { this.habit.week += "토 "; }
       if(this.habit.sun === true) { this.habit.week += "일 "; }
-
+      
       let week = this.habit.week.replace(/ /gi, '');
       if(week === "월화수목금토일") {
         this.habit.week = "매일";
@@ -66,7 +51,15 @@ export class CreatePage {
         this.habit.week = week + "요일마다";
       }
 
-      this.list.push(this.habit);
+      let index = 0;
+      for(let i = 0; i < list.length; i++) {
+        if(list[i].key === this.habit.key) {
+          index = i;
+          break;
+        }
+      }
+
+      this.list[index] = this.habit;
 
       const loading = this.loadingCtrl.create({
         content: '저장 중...'
@@ -75,13 +68,12 @@ export class CreatePage {
 
       this.storage.set("habitList", this.list).then(() => {
         loading.dismiss();
-        this.navCtrl.setRoot(ListPage);
+        this.navCtrl.pop();
       }).catch(() => {
         loading.dismiss();
       });
 
     }).catch(() => {});
-    //this.storage.clear();
   }
 
 }
