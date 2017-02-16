@@ -4,6 +4,7 @@ import { NavController, NavParams, AlertController, LoadingController  } from 'i
 
 import { ListPage } from '../list/list';
 import { UpdatePage } from '../update/update';
+import * as moment from 'moment';
 
 
 @Component({
@@ -12,16 +13,36 @@ import { UpdatePage } from '../update/update';
 })
 export class DetailPage {
   detailItem: any;
+  check: any;
+  checklist: Array<{}> = [];
+  list: Array<{}> = [];
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public alertCtrl: AlertController,
     public storage: Storage,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+
   ) {
     // If we navigated to this page, we will have an item available as a nav param
     this.detailItem = navParams.get('item');
+
+    this.checklist = [];
+    this.storage.get("checklist").then((checklist) => {
+      this.checklist = checklist;
+      console.log(this.checklist);
+    }).catch(() => {});
+
+    console.log(this.checklist);
+
+    this.check = {
+      key: 0,
+      date: moment().format(),
+      memo: ""
+    };
+
+
   }
 
   deleteHabit() {
@@ -70,6 +91,7 @@ export class DetailPage {
   }
 
   createCheck() {
+
     let prompt = this.alertCtrl.create({
       title: '체크하기',
       message: "간단한 메모를 입력하세요",
@@ -86,7 +108,30 @@ export class DetailPage {
       {
         text: '확인',
         handler: data => {
+          /*
+          this.storage.get("checklist").then((list) => {
+            if(list !== null) {
+              this.check.key = (list.length + 1);
+              this.list = list;
+            }
+          }).catch(() => {});
+
           console.log('Saved clicked');
+          this.check.memo = data.memo;
+          this.check.date = moment().format();
+          this.list.push(this.check);
+
+          const loading = this.loadingCtrl.create({
+            content: '저장 중...'
+          });
+          loading.present();
+
+          this.storage.set("checklist", this.list).then(() => {
+            loading.dismiss();
+          }).catch(() => {
+            loading.dismiss();
+          });
+          */
         }
       }]
     });
