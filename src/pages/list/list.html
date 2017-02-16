@@ -22,8 +22,7 @@
       <p>{{item.week}}</p>
       <ion-note item-right>{{item.times}}</ion-note>
     </ion-item>
-
-    <ion-item *ngIf="!list">
+    <ion-item *ngIf="!list || list.length < 1">
       <h2>버릇을 등록해주세요</h2>
     </ion-item>
   </ion-list>
