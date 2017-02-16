@@ -39,7 +39,7 @@ export class UpdatePage {
       if(this.habit.fri === true) { this.habit.week += "금 "; }
       if(this.habit.sat === true) { this.habit.week += "토 "; }
       if(this.habit.sun === true) { this.habit.week += "일 "; }
-      
+
       let week = this.habit.week.replace(/ /gi, '');
       if(week === "월화수목금토일") {
         this.habit.week = "매일";

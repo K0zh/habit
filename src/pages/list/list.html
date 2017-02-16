@@ -15,9 +15,7 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let item of list" (click)="itemTapped($event, item)">
-      <ion-avatar item-left>
-        <img src="assets/img/avatar-{{item.icon}}.png">
-      </ion-avatar>
+      <i class="fa {{item.icon}} fa-lg" item-left style="margin-right: 16px;"></i>
       <h2>{{item.title}}</h2>
       <p>{{item.week}}</p>
       <ion-note item-right>{{item.times}}</ion-note>
