@@ -16,3 +16,6 @@ ionic platform add android
 (ionic build)
 ionic run android
 ```
+
+### Update
+아이콘 등록 안해도 됨 만드는 중
