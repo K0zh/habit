@@ -15,10 +15,10 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let item of list" (click)="itemTapped($event, item)">
-      <i class="fa {{item.icon}} fa-lg" item-left style="margin-right: 16px;"></i>
+      <i class="fa fa-lg {{item.icon}}" item-left style="margin-right: 16px;"></i>
       <h2>{{item.title}}</h2>
       <p>{{item.week}}</p>
-      <ion-note item-right>{{item.times}}</ion-note>
+      <ion-note item-right>{{item.times_LT}}</ion-note>
     </ion-item>
     <ion-item *ngIf="!list || list.length < 1">
       <h2>버릇을 등록해주세요</h2>

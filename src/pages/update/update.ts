@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'page-update',
@@ -19,9 +21,14 @@ export class UpdatePage {
     public loadingCtrl: LoadingController
   ) {
     this.habit = navParams.get('item');
-    this.icons = ['ts-barbie', 'ts-bopeep', 'ts-bullseye', 'ts-buzz', 'ts-hamm',
-    'ts-jessie', 'ts-potatohead', 'ts-rex', 'ts-sarge', 'ts-slinky', 'ts-squeeze',
-    'ts-woody'];
+    this.icons = ['fa-heart', 'fa-heart-o', 'fa-medkit', 'fa-play', 'fa-file'
+      , 'fa-repeat', 'fa-scissors', 'fa-table', 'fa-krw', 'fa-usd', 'fa-area-chart'
+      , 'fa-gear', 'fa-refresh', 'fa-bicycle', 'fa-car', 'fa-plane', 'fa-subway', 'fa-train'
+      , 'fa-user', 'fa-tree', 'fa-video-camera', 'fa-star', 'fa-soccor-ball-o', 'fa-shopping-bag'
+      , 'fa-recycle', 'fa-quote-left', 'fa-photo', 'fa-phone', 'fa-paw', 'fa-paint-brush'
+      , 'fa-music', 'fa-language', 'fa-image', 'fa-home', 'fa-gamepad', 'fa-flask', 'fa-male'
+      , 'fa-female', 'fa-cutlery', 'fa-coffe', 'fa-book', 'fa-calculator',, 'fa-calendar'
+    ];
   }
 
   updateHabit() {
@@ -29,8 +36,11 @@ export class UpdatePage {
       if(list !== null) {
         this.list = list;
       }
+
+      /** 아이콘 */
       this.habit.icon = this.icons[Math.floor(Math.random() * this.icons.length)];
 
+      /** 요일 표기 */
       this.habit.week = "";
       if(this.habit.mon === true) { this.habit.week += "월 "; }
       if(this.habit.tue === true) { this.habit.week += "화 "; }
@@ -59,6 +69,10 @@ export class UpdatePage {
         }
       }
 
+      /** 시간 표기 */
+      this.habit.times_LT = moment(this.habit.times, "H:mm").format("LT");
+
+      /** 저장 */
       this.list[index] = this.habit;
 
       const loading = this.loadingCtrl.create({

@@ -3,7 +3,7 @@ import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { ListPage } from '../list/list';
-
+import * as moment from 'moment';
 
 @Component({
   selector: 'page-create',
@@ -32,6 +32,7 @@ export class CreatePage {
       sun: false,
       week: "",
       times: "12:00",
+      times_LT: "12:00 PM",
       push: true
     };
     this.icons = ['fa-heart', 'fa-heart-o', 'fa-medkit', 'fa-play', 'fa-file'
@@ -51,7 +52,10 @@ export class CreatePage {
         this.list = list;
       }
 
+      /** 아이콘 */
       this.habit.icon = this.icons[Math.floor(Math.random() * this.icons.length)];
+
+      /** 요일 표기 */
       if(this.habit.mon === true) { this.habit.week += "월 "; }
       if(this.habit.tue === true) { this.habit.week += "화 "; }
       if(this.habit.wed === true) { this.habit.week += "수 "; }
@@ -71,6 +75,10 @@ export class CreatePage {
         this.habit.week = week + "요일마다";
       }
 
+      /** 시간 표기 */
+      this.habit.times_LT = moment(this.habit.times, "H:mm").format("LT");
+
+      /** 저장 */
       this.list.push(this.habit);
 
       const loading = this.loadingCtrl.create({
