@@ -9,6 +9,7 @@ import { DetailPage } from '../pages/detail/detail';
 import { SettingPage } from '../pages/setting/setting';
 import { GuidePage } from '../pages/guide/guide';
 import { UpdatePage } from '../pages/update/update';
+import { IconPage } from '../pages/icon/icon';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { UpdatePage } from '../pages/update/update';
     DetailPage,
     SettingPage,
     GuidePage,
-    UpdatePage
+    UpdatePage,
+    IconPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -31,7 +33,8 @@ import { UpdatePage } from '../pages/update/update';
     DetailPage,
     SettingPage,
     GuidePage,
-    UpdatePage
+    UpdatePage,
+    IconPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Storage]
 })

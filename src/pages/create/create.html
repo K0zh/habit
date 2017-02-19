@@ -14,6 +14,11 @@
 
 <ion-content>
   <ion-item-group>
+    <ion-item-divider color="light">아이콘 선택</ion-item-divider>
+    <a ion-item (click)="openModal()">Icon</a>
+  </ion-item-group>
+
+  <ion-item-group>
     <ion-item-divider color="light">버릇 제목</ion-item-divider>
     <ion-item>
       <ion-input type="text" placeholder="제목" [(ngModel)]="habit.title"></ion-input>
