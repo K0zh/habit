@@ -13,7 +13,6 @@ import { IconPage } from '../icon/icon';
   templateUrl: 'create.html'
 })
 export class CreatePage {
-  icons: string[];
   list: Array<{}> = [];
   habit: any;
 
@@ -39,14 +38,6 @@ export class CreatePage {
       times_LT: "12:00 PM",
       push: true
     };
-    this.icons = ['fa-heart', 'fa-heart-o', 'fa-medkit', 'fa-play', 'fa-file'
-      , 'fa-repeat', 'fa-scissors', 'fa-table', 'fa-krw', 'fa-usd', 'fa-area-chart'
-      , 'fa-gear', 'fa-refresh', 'fa-bicycle', 'fa-car', 'fa-plane', 'fa-subway', 'fa-train'
-      , 'fa-user', 'fa-tree', 'fa-video-camera', 'fa-star', 'fa-soccer-ball-o', 'fa-shopping-bag'
-      , 'fa-recycle', 'fa-quote-left', 'fa-photo', 'fa-phone', 'fa-paw', 'fa-paint-brush'
-      , 'fa-music', 'fa-language', 'fa-image', 'fa-home', 'fa-gamepad', 'fa-flask', 'fa-male'
-      , 'fa-female', 'fa-cutlery', 'fa-coffee', 'fa-book', 'fa-calculator', 'fa-calendar'
-    ];
   }
 
   createHabit() {
@@ -55,9 +46,6 @@ export class CreatePage {
         this.habit.key = (list.length + 1);
         this.list = list;
       }
-
-      /** 아이콘 */
-      //this.habit.icon = this.icons[Math.floor(Math.random() * this.icons.length)];
 
       /** 요일 표기 */
       if(this.habit.mon === true) { this.habit.week += "월 "; }
@@ -104,7 +92,9 @@ export class CreatePage {
   openModal() {
     let modal = this.modalCtrl.create(IconPage);
     modal.onDidDismiss(data => {
-     this.habit.icon = data.icon;
+      if(data !== undefined) {
+        this.habit.icon = data.icon;
+      }
     });
     modal.present();
   }

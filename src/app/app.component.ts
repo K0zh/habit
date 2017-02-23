@@ -6,6 +6,7 @@ import { ListPage } from '../pages/list/list';
 import { CreatePage } from '../pages/create/create';
 import { SettingPage } from '../pages/setting/setting';
 import { GuidePage } from '../pages/guide/guide';
+import { InfomationPage } from '../pages/infomation/infomation';
 
 
 @Component({
@@ -29,7 +30,7 @@ export class MyApp {
       { title: '버릇 등록', component: CreatePage, icon: 'md-add'},
       { title: '설정', component: SettingPage, icon: 'settings' },
       { title: '가이드 보기', component: GuidePage, icon: 'book' },
-      { title: '버릇 정보', component: ListPage, icon: 'information-circle' }
+      { title: '버릇 정보', component: InfomationPage, icon: 'information-circle' }
     ];
   }
 
