@@ -5,7 +5,6 @@ import { Storage } from '@ionic/storage';
 import * as moment from 'moment';
 
 import { ListPage } from '../list/list';
-
 import { IconPage } from '../icon/icon';
 
 
@@ -58,7 +57,7 @@ export class CreatePage {
       }
 
       /** 아이콘 */
-      this.habit.icon = this.icons[Math.floor(Math.random() * this.icons.length)];
+      //this.habit.icon = this.icons[Math.floor(Math.random() * this.icons.length)];
 
       /** 요일 표기 */
       if(this.habit.mon === true) { this.habit.week += "월 "; }
@@ -104,6 +103,9 @@ export class CreatePage {
 
   openModal() {
     let modal = this.modalCtrl.create(IconPage);
+    modal.onDidDismiss(data => {
+     this.habit.icon = data.icon;
+    });
     modal.present();
   }
 

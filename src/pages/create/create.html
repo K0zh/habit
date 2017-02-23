@@ -14,8 +14,11 @@
 
 <ion-content>
   <ion-item-group>
-    <ion-item-divider color="light">아이콘 선택</ion-item-divider>
-    <a ion-item (click)="openModal()">Icon</a>
+    <ion-item-divider color="light">아이콘</ion-item-divider>
+    <a ion-item (click)="openModal()">
+      <span *ngIf="!habit.icon">선택</span>
+      <i *ngIf="habit.icon" class="fa {{habit.icon}}"></i>
+    </a>
   </ion-item-group>
 
   <ion-item-group>

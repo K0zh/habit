@@ -13,7 +13,7 @@
 <ion-content text-center class="icons-basic-page">
   <ion-row>
     <ion-col *ngFor="let icon of icons">
-      <i class="fa fa-lg {{icon}}"></i>
+      <i class="fa fa-lg {{icon}}" (click)="selectIcon(icon)"></i>
     </ion-col>
   </ion-row>
 </ion-content>

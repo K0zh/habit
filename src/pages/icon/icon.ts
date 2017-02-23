@@ -24,9 +24,13 @@ export class IconPage {
     ];
   }
 
-
   dismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  selectIcon(icon) {
+    let data = { 'icon': icon };
+    this.viewCtrl.dismiss(data);
   }
 
 }

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import * as moment from 'moment';
 
+import { IconPage } from '../icon/icon';
 
 @Component({
   selector: 'page-update',
@@ -18,7 +19,8 @@ export class UpdatePage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public storage: Storage,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public modalCtrl: ModalController
   ) {
     this.habit = navParams.get('item');
     this.icons = ['fa-heart', 'fa-heart-o', 'fa-medkit', 'fa-play', 'fa-file'
@@ -38,7 +40,7 @@ export class UpdatePage {
       }
 
       /** 아이콘 */
-      this.habit.icon = this.icons[Math.floor(Math.random() * this.icons.length)];
+      //this.habit.icon = this.icons[Math.floor(Math.random() * this.icons.length)];
 
       /** 요일 표기 */
       this.habit.week = "";
@@ -88,6 +90,14 @@ export class UpdatePage {
       });
 
     }).catch(() => {});
+  }
+
+  openModal() {
+    let modal = this.modalCtrl.create(IconPage);
+    modal.onDidDismiss(data => {
+     this.habit.icon = data.icon;
+    });
+    modal.present();
   }
 
 }
