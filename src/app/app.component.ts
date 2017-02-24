@@ -8,6 +8,7 @@ import { SettingPage } from '../pages/setting/setting';
 import { GuidePage } from '../pages/guide/guide';
 import { InfomationPage } from '../pages/infomation/infomation';
 
+import { Storage } from '@ionic/storage';
 
 @Component({
   templateUrl: 'app.html'
@@ -16,13 +17,23 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   // make HelloIonicPage the root (or first) page
-  rootPage: any = ListPage;
+  rootPage: any;
   pages: Array<{title: string, component: any, icon: string}>;
 
   constructor(
     public platform: Platform,
-    public menu: MenuController
+    public menu: MenuController,
+    public storage: Storage
   ) {
+
+    this.storage.get("guideChk").then((val) => {
+      if(val == null) {
+        this.rootPage = GuidePage;
+      } else {
+        this.rootPage = ListPage;
+      }
+    })
+
     this.initializeApp();
 
     // set our app's pages

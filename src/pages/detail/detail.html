@@ -34,21 +34,12 @@
         <ion-icon name="md-add"></ion-icon>
       </button>
     </ion-list-header>
-    <ion-item>
-      <h3>2017-02-12</h3>
-      <p>가나다라마바사아자차카타파하 ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+    <ion-item *ngFor="let item of checklist" (click)="itemTapped($event, item)">
+         <h2>{{item.date}}</h2>
+         <p>{{item.memo}}</p>
     </ion-item>
-    <ion-item>
-      <h3>2017-02-12</h3>
-      <p>가나다라마바사아자차카타파하 ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
-    </ion-item>
-    <ion-item>
-      <h3>2017-02-12</h3>
-      <p>가나다라마바사아자차카타파하 ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
-    </ion-item>
-    <ion-item>
-      <h3>2017-02-12</h3>
-      <p>가나다라마바사아자차카타파하 ABCDEFGHIJKLMNOPQRSTUVWXYZ</p>
+    <ion-item *ngIf="!checklist || checklist.length < 1">
+      <h2>천리길도 한걸음 부터</h2>
     </ion-item>
   </ion-list>
 

@@ -16,6 +16,10 @@ export class DetailPage {
   check: any;
   checklist: Array<{}> = [];
   list: Array<{}> = [];
+  checkflag: boolean;
+  today: String;
+  today_time: String;
+  checktime: any;
 
   constructor(
     public navCtrl: NavController,
@@ -28,13 +32,17 @@ export class DetailPage {
     // If we navigated to this page, we will have an item available as a nav param
     this.detailItem = navParams.get('item');
 
+    /*
+    this.today = moment().format('MMMM Do YYYY,');
+    this.today_time = moment().format('hh:mm');
+    this.checktime = Date.parse(this.today + this.detailItem.times);
+    console.log(this.checktime);
+    */
+
     this.checklist = [];
     this.storage.get("checklist").then((checklist) => {
       this.checklist = checklist;
-      console.log(this.checklist);
     }).catch(() => {});
-
-    console.log(this.checklist);
 
     this.check = {
       key: 0,
@@ -108,30 +116,46 @@ export class DetailPage {
       {
         text: '확인',
         handler: data => {
-          /*
-          this.storage.get("checklist").then((list) => {
-            if(list !== null) {
-              this.check.key = (list.length + 1);
-              this.list = list;
-            }
-          }).catch(() => {});
-
+          //체크리스트 저장
           console.log('Saved clicked');
-          this.check.memo = data.memo;
-          this.check.date = moment().format();
-          this.list.push(this.check);
+          // this.storage.get("checklist").then((checklist) => {
+          //   // const loading = this.loadingCtrl.create({
+          //   //   content: '저장 중...'
+          //   // });
+          //   // loading.present();
+          //
+          //
+          //   if(checklist != null) {
+          //     let index = 0;
+          //     for(let i = 0; i < checklist.length; i++) {
+          //       if(checklist[i].key === this.check.key) {
+          //         index = i;
+          //         break;
+          //       }
+          //     }
+          //
+          //     this.check.key = (checklist.length);
+          //     this.check.memo = data.memo;
+          //     this.check.date = moment().format();
+          //     this.check.checkflag = true
+          //     this.list[index] = this.check;
+          //
+          //   } else {
+          //     this.check.memo = data.memo;
+          //     this.check.date = moment().format();
+          //     this.check.checkflag = true
+          //     this.list.push(this.check);
+          //   }
+          //
+          //
+          //
+          //   this.storage.set("checklist", this.list).then(() => {
+          //     //loading.dismiss();
+          //   }).catch(() => {
+          //     //loading.dismiss();
+          //   });
+          // }).catch(() => {});
 
-          const loading = this.loadingCtrl.create({
-            content: '저장 중...'
-          });
-          loading.present();
-
-          this.storage.set("checklist", this.list).then(() => {
-            loading.dismiss();
-          }).catch(() => {
-            loading.dismiss();
-          });
-          */
         }
       }]
     });
