@@ -16,8 +16,8 @@ export class SettingPage {
     public storage: Storage
   ) {
     this.settings = {
-      start: false,
-      push: false
+      guide: false,
+      notification: false
     }
     storage.get('settings').then((val) => {
       if(val !== null) {

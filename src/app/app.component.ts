@@ -17,7 +17,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   // make HelloIonicPage the root (or first) page
-  rootPage: any;
+  rootPage: Component;
   pages: Array<{title: string, component: any, icon: string}>;
 
   constructor(
@@ -25,9 +25,8 @@ export class MyApp {
     public menu: MenuController,
     public storage: Storage
   ) {
-
-    this.storage.get("guideChk").then((val) => {
-      if(val == null) {
+    storage.get("settings").then((val) => {
+      if(val === null || val.guide) {
         this.rootPage = GuidePage;
       } else {
         this.rootPage = ListPage;
