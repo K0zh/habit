@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import { AdMob } from 'ionic-native';
 
 import { DetailPage } from '../detail/detail';
 import { CreatePage } from '../create/create';
@@ -24,6 +25,14 @@ export class ListPage {
     this.storage.get("habitList").then((list) => {
       this.list = list;
     }).catch(() => {});
+
+    // AdMob.createBanner({
+    //   adId: 'ca-app-pub-4139703854678189/7032626151',
+    //   adSize: 'SMART_BANNER',
+    //   isTesting: true
+    // }).then(() => {
+    //   AdMob.showBanner(8);
+    // });
   }
 
   itemTapped(event, item) {

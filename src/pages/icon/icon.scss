@@ -1,15 +1,15 @@
 page-icon {
-  .icons-basic-page {
+  .icons-page {
     ion-row {
-      height: 100%;
+      height: 50%;
       flex-wrap: wrap;
     }
 
     ion-col {
-      flex: 0 0 20%;
-      max-width: 20%;
+      flex: 0 0 25%;
+      max-width: 25%;
       text-align: center;
-      padding: 10px 5px;
+      padding: 15px 5px;
     }
   }
 }

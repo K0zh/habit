@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 import { ListPage } from '../list/list';
 
@@ -9,14 +10,22 @@ import { ListPage } from '../list/list';
   templateUrl: 'guide.html'
 })
 export class GuidePage {
+  settings: any;
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams
+    public navParams: NavParams,
+    public storage: Storage
   ) {
+    this.settings = {
+      guide: false,
+      notification: false
+    }
   }
 
   continueTapped(event) {
-    this.navCtrl.setRoot(ListPage);
+    this.storage.set("settings", this.settings).then(() => {
+      this.navCtrl.setRoot(ListPage);
+    }).catch(() => {});
   }
 }

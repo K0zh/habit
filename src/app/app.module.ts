@@ -10,7 +10,7 @@ import { SettingPage } from '../pages/setting/setting';
 import { GuidePage } from '../pages/guide/guide';
 import { UpdatePage } from '../pages/update/update';
 import { IconPage } from '../pages/icon/icon';
-import { InfomationPage } from '../pages/infomation/infomation';
+import { InformationPage } from '../pages/information/information';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,7 @@ import { InfomationPage } from '../pages/infomation/infomation';
     GuidePage,
     UpdatePage,
     IconPage,
-    InfomationPage
+    InformationPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -37,7 +37,7 @@ import { InfomationPage } from '../pages/infomation/infomation';
     GuidePage,
     UpdatePage,
     IconPage,
-    InfomationPage
+    InformationPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Storage]
 })
