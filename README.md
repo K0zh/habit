@@ -18,4 +18,7 @@ ionic run android
 ```
 
 ### Update
-아이콘 등록 안해도 됨 만드는 중
+#### 2017-02-26
+```
+ionic plugin add cordova-plugin-admobpro
+```
