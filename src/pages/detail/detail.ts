@@ -15,11 +15,16 @@ export class DetailPage {
   detailItem: any;
   check: any;
   checklist: Array<{}> = [];
+  checklistDetail: Array<{}> = [];
   list: Array<{}> = [];
-  checkflag: boolean;
-  today: String;
-  today_time: String;
-  checktime: any;
+
+  checkflag: any;
+
+  timeArray: Array<String> = [];
+  today: Date;
+  checkDate: Date;
+  checkTime: any; //체크가능 시간
+
 
   constructor(
     public navCtrl: NavController,
@@ -32,24 +37,40 @@ export class DetailPage {
     // If we navigated to this page, we will have an item available as a nav param
     this.detailItem = navParams.get('item');
 
-    /*
-    this.today = moment().format('MMMM Do YYYY,');
-    this.today_time = moment().format('hh:mm');
-    this.checktime = Date.parse(this.today + this.detailItem.times);
-    console.log(this.checktime);
-    */
+    this.checkDate = new Date();
+    this.today = new Date();
+
+    this.timeArray = this.detailItem.times.split(":");
+    this.checkDate.setHours(+this.timeArray[0]);
+    this.checkDate.setMinutes(+this.timeArray[1]);
+
+    const checkHours = this.checkDate.getHours() * 60 * 60,
+          checkMinutes = this.checkDate.getMinutes() * 60,
+          todayHours = this.today.getHours() * 60 * 60,
+          todayMinutes = this.today.getMinutes() * 60;
+
+    this.checkTime = Math.abs((todayHours + todayMinutes) - (checkHours + checkMinutes));
 
     this.checklist = [];
+    this.checklistDetail = [];
+
     this.storage.get("checklist").then((checklist) => {
       this.checklist = checklist;
+      for(let i = 0; i < checklist.length; i++) {
+        console.log(checklist[i].parent);
+        if(checklist[i].parent === this.detailItem.key) {
+          this.checklistDetail.push(checklist[i]);
+        }
+
+      }
     }).catch(() => {});
 
     this.check = {
       key: 0,
+      parent: this.detailItem.key,
       date: moment().format(),
       memo: ""
     };
-
 
   }
 
@@ -118,43 +139,59 @@ export class DetailPage {
         handler: data => {
           //체크리스트 저장
           console.log('Saved clicked');
-          // this.storage.get("checklist").then((checklist) => {
-          //   // const loading = this.loadingCtrl.create({
-          //   //   content: '저장 중...'
-          //   // });
-          //   // loading.present();
-          //
-          //
-          //   if(checklist != null) {
-          //     let index = 0;
-          //     for(let i = 0; i < checklist.length; i++) {
-          //       if(checklist[i].key === this.check.key) {
-          //         index = i;
-          //         break;
-          //       }
-          //     }
-          //
-          //     this.check.key = (checklist.length);
-          //     this.check.memo = data.memo;
-          //     this.check.date = moment().format();
-          //     this.check.checkflag = true
-          //     this.list[index] = this.check;
-          //
-          //   } else {
-          //     this.check.memo = data.memo;
-          //     this.check.date = moment().format();
-          //     this.check.checkflag = true
-          //     this.list.push(this.check);
-          //   }
-          //
-          //
-          //
-          //   this.storage.set("checklist", this.list).then(() => {
-          //     //loading.dismiss();
-          //   }).catch(() => {
-          //     //loading.dismiss();
-          //   });
-          // }).catch(() => {});
+
+          if(this.checkTime < 600) {
+            this.storage.get("checklist").then((checklist) => {
+              const loading = this.loadingCtrl.create({
+                content: '저장 중...'
+              });
+              loading.present();
+
+              if(checklist !== null) {
+
+                this.check.key = (checklist.length) + 1;
+                this.list = checklist;
+
+                const duplicateCheck = new Date(checklist[checklist.length - 1].date);
+                //if(duplicateCheck.getTime())
+                this.checkflag = Math.abs(duplicateCheck.getTime() - this.today.getTime())
+
+              } else {
+                this.checkflag = 0;
+              }
+
+              this.check.parent = this.detailItem.key;
+              this.check.memo = data.memo;
+              this.check.date = moment().format();
+
+              console.log(this.checkflag)
+              if(this.checkflag < 600000) {
+                this.list.push(this.check);
+              } else {
+                let alert = this.alertCtrl.create({
+                  title: '알림',
+                  subTitle: '이미 체크했다',
+                  buttons: ['확인']
+                });
+                alert.present();
+              }
+
+              this.storage.set("checklist", this.list).then(() => {
+                loading.dismiss();
+                this.checklist = this.list;
+              }).catch(() => {
+                loading.dismiss();
+              });
+            }).catch(() => {});
+          } else {
+            console.log("체크시간 확인해라");
+            let alert = this.alertCtrl.create({
+              title: '알림',
+              subTitle: '체크시간 확인해라',
+              buttons: ['확인']
+            });
+            alert.present();
+          }
 
         }
       }]

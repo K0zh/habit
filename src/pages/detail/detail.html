@@ -34,11 +34,11 @@
         <ion-icon name="md-add"></ion-icon>
       </button>
     </ion-list-header>
-    <ion-item *ngFor="let item of checklist" (click)="itemTapped($event, item)">
+    <ion-item *ngFor="let item of checklistDetail" (click)="itemTapped($event, item)">
          <h2>{{item.date}}</h2>
          <p>{{item.memo}}</p>
     </ion-item>
-    <ion-item *ngIf="!checklist || checklist.length < 1">
+    <ion-item *ngIf="!checklistDetail || checklistDetail.length < 1">
       <h2>천리길도 한걸음 부터</h2>
     </ion-item>
   </ion-list>
