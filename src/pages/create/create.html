@@ -14,10 +14,11 @@
 
 <ion-content>
   <ion-item-group>
-    <ion-item-divider color="light">아이콘</ion-item-divider>
+    <ion-item-divider color="light">카테고리</ion-item-divider>
     <a ion-item (click)="openModal()">
-      <span *ngIf="!habit.icon">선택</span>
-      <i *ngIf="habit.icon" class="fa {{habit.icon}}"></i>
+      <span *ngIf="!habit.category">선택</span>
+      <i *ngIf="habit.category" class="fa {{habit.category.icon}}" item-left></i>
+      <span *ngIf="habit.category">{{habit.category.ko_name}}</span>
     </a>
   </ion-item-group>
 

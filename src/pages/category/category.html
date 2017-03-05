@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">취소</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button (click)="selectCategory()">
+        <span ion-text color="primary" showWhen="ios">확인</span>
+        <ion-icon name="md-checkmark" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>버릇</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content text-center class="icons-page">
+  <ion-list radio-group [(ngModel)]="selectedRadio">
+    <ion-item *ngFor="let category of categorys">
+      <i class="fa fa-lg {{category.icon}}" item-left></i>
+      <ion-label>{{category.ko_name}}</ion-label>
+      <ion-radio value="{{category.en_name}}"></ion-radio>
+    </ion-item>
+  </ion-list>
+</ion-content>

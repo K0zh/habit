@@ -5,7 +5,7 @@ import { Storage } from '@ionic/storage';
 import * as moment from 'moment';
 
 import { ListPage } from '../list/list';
-import { IconPage } from '../icon/icon';
+import { CategoryPage } from '../category/category';
 
 
 @Component({
@@ -24,7 +24,7 @@ export class CreatePage {
   ) {
     this.habit = {
       key: 0,
-      icon: "",
+      category: null,
       title: "",
       mon: false,
       tue: false,
@@ -90,10 +90,10 @@ export class CreatePage {
   }
 
   openModal() {
-    let modal = this.modalCtrl.create(IconPage);
+    let modal = this.modalCtrl.create(CategoryPage);
     modal.onDidDismiss(data => {
-      if(data !== undefined) {
-        this.habit.icon = data.icon;
+      if(data !== undefined && data !== null) {
+        this.habit.category = data;
       }
     });
     modal.present();

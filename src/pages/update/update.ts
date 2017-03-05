@@ -4,7 +4,7 @@ import { Storage } from '@ionic/storage';
 
 import * as moment from 'moment';
 
-import { IconPage } from '../icon/icon';
+import { CategoryPage } from '../category/category';
 
 @Component({
   selector: 'page-update',
@@ -80,11 +80,11 @@ export class UpdatePage {
     }).catch(() => {});
   }
 
-  openModal() {
-    let modal = this.modalCtrl.create(IconPage);
+  openModal(category_en_name) {
+    let modal = this.modalCtrl.create(CategoryPage, {category_en_name : category_en_name});
     modal.onDidDismiss(data => {
-      if(data !== undefined) {
-        this.habit.icon = data.icon;
+      if(data !== undefined && data !== null) {
+        this.habit.category = data;
       }
     });
     modal.present();

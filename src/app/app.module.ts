@@ -9,8 +9,8 @@ import { DetailPage } from '../pages/detail/detail';
 import { SettingPage } from '../pages/setting/setting';
 import { GuidePage } from '../pages/guide/guide';
 import { UpdatePage } from '../pages/update/update';
-import { IconPage } from '../pages/icon/icon';
 import { InformationPage } from '../pages/information/information';
+import { CategoryPage } from '../pages/category/category';
 
 @NgModule({
   declarations: [
@@ -21,8 +21,8 @@ import { InformationPage } from '../pages/information/information';
     SettingPage,
     GuidePage,
     UpdatePage,
-    IconPage,
-    InformationPage
+    InformationPage,
+    CategoryPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -36,8 +36,8 @@ import { InformationPage } from '../pages/information/information';
     SettingPage,
     GuidePage,
     UpdatePage,
-    IconPage,
-    InformationPage
+    InformationPage,
+    CategoryPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Storage]
 })
