@@ -12,28 +12,14 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="card-background-page" >
+<ion-content class="card-background-page">
 
-  <ion-card *ngFor="let item of list" (click)="itemTapped($event, item)" no-margin no-width>
+  <ion-card *ngFor="let item of list" (click)="itemTapped($event, item)" no-margin>
     <img class="card-back" src="assets/img/{{item.category.en_name}}_1.jpg"/>
     <div class="card-title">{{item.title}}</div>
     <div class="card-week">{{item.week}}</div>
     <div class="card-time">{{item.times_LT}}</div>
   </ion-card>
 
-  <h2 *ngIf="!list || list.length < 1">버릇을 등록해주세요</h2>
+  <h2 *ngIf="!list || list.length < 1" text-center>버릇을 등록해주세요</h2>
 </ion-content>
-
-<!-- <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let item of list" (click)="itemTapped($event, item)">
-      <i class="fa fa-lg {{item.category.icon}}" item-left style="margin-right: 16px;"></i>
-      <h2>{{item.title}}</h2>
-      <p>{{item.week}}</p>
-      <ion-note item-right>{{item.times_LT}}</ion-note>
-    </ion-item>
-    <ion-item *ngIf="!list || list.length < 1">
-      <h2>버릇을 등록해주세요</h2>
-    </ion-item>
-  </ion-list>
-</ion-content> -->
