@@ -20,27 +20,32 @@ export class CategoryPage {
       {
         en_name: 'excercise',
         ko_name: '운동',
-        icon: 'fa-soccer-ball-o'
+        icon: 'fa-soccer-ball-o',
+        img_num: '1'
       },
       {
         en_name: 'study',
         ko_name: '공부',
-        icon: 'fa-book'
+        icon: 'fa-book',
+        img_num: '1'
       },
       {
         en_name: 'hobby',
         ko_name: '취미',
-        icon: 'fa-music'
+        icon: 'fa-music',
+        img_num: '1'
       },
       {
         en_name: 'game',
         ko_name: '게임',
-        icon: 'fa-gamepad'
+        icon: 'fa-gamepad',
+        img_num: '1'
       },
       {
         en_name: 'etc',
         ko_name: '기타',
-        icon: 'fa-star'
+        icon: 'fa-star',
+        img_num: '1'
       }
     ];
 
@@ -63,6 +68,12 @@ export class CategoryPage {
       }
     }
     if(data !== null) {
+      if(data.en_name === "etc") {
+        data.img_num = (Math.ceil(Math.random() * 7)).toString();
+      } else {
+        data.img_num = (Math.ceil(Math.random() * 4)).toString();
+      }
+
       this.viewCtrl.dismiss(data);
     }
   }

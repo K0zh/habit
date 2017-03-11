@@ -15,7 +15,7 @@
 <ion-content class="card-background-page">
 
   <ion-card *ngFor="let item of list" (click)="itemTapped($event, item)" no-margin>
-    <img class="card-back" src="assets/img/{{item.category.en_name}}_1.jpg"/>
+    <img class="card-back" src="assets/img/{{item.category.en_name}}_{{item.category.img_num}}.jpg"/>
     <div class="card-title">{{item.title}}</div>
     <div class="card-week">{{item.week}}</div>
     <div class="card-time">{{item.times_LT}}</div>
