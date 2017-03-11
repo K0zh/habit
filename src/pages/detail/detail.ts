@@ -174,7 +174,7 @@ export class DetailPage {
               this.check.date = moment().format();
 
               console.log(this.checkflag)
-              if(this.checkflag < 1) { // 마지막 체크가 10분 이하일 경우
+              if(this.checkflag < 600000) { // 마지막 체크가 10분 이하일 경우
                 let alert = this.alertCtrl.create({
                   title: '알림',
                   subTitle: '이미 체크했다',
