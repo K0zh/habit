@@ -15,7 +15,7 @@ export class DetailPage {
   detailItem: any;
   check: any;
   checklist: Array<{}> = [];
-  checklistDetail: Array<{}> = [];
+  checklist_detail: Array<any> = [];
   list: Array<{}> = [];
 
   checkflag: any;
@@ -52,21 +52,20 @@ export class DetailPage {
     this.checkTime = Math.abs((todayHours + todayMinutes) - (checkHours + checkMinutes));
 
     this.checklist = [];
-    this.checklistDetail = [];
+    this.checklist_detail = [];
 
     this.storage.get("checklist").then((checklist) => {
       this.checklist = checklist;
       for(let i = 0; i < checklist.length; i++) {
         console.log(checklist[i].parent);
         if(checklist[i].parent === this.detailItem.key) {
-          this.checklistDetail.push(checklist[i]);
+          this.checklist_detail.push(checklist[i]);
         }
-
       }
     }).catch(() => {});
 
     this.check = {
-      key: 0,
+      key: 1,
       parent: this.detailItem.key,
       date: moment().format(),
       memo: ""
@@ -149,15 +148,25 @@ export class DetailPage {
 
               if(checklist !== null) {
 
-                this.check.key = (checklist.length) + 1;
+                this.checklist = checklist;
+                this.checklist_detail = [];
+                for(let i = 0; i < checklist.length; i++) {
+                  console.log(checklist[i].parent);
+                  if(checklist[i].parent === this.detailItem.key) {
+                    this.checklist_detail.push(checklist[i]);
+                  }
+                }
+
+                this.check.key = (this.checklist_detail.length) + 1;
                 this.list = checklist;
 
-                const duplicateCheck = new Date(checklist[checklist.length - 1].date);
-                //if(duplicateCheck.getTime())
-                this.checkflag = Math.abs(duplicateCheck.getTime() - this.today.getTime())
+                if(this.checklist_detail.length > 0) {
+                const duplicateCheck = new Date(this.checklist_detail[this.checklist_detail.length - 1].date);
+                  this.checkflag = Math.abs(duplicateCheck.getTime() - this.today.getTime())
+                }
 
               } else {
-                this.checkflag = 0;
+                this.checkflag = 600001; //첫번째 체크시 무조건 등록
               }
 
               this.check.parent = this.detailItem.key;
@@ -165,23 +174,28 @@ export class DetailPage {
               this.check.date = moment().format();
 
               console.log(this.checkflag)
-              if(this.checkflag < 600000) {
-                this.list.push(this.check);
-              } else {
+              if(this.checkflag < 1) { // 마지막 체크가 10분 이하일 경우
                 let alert = this.alertCtrl.create({
                   title: '알림',
                   subTitle: '이미 체크했다',
                   buttons: ['확인']
                 });
                 alert.present();
-              }
+                loading.dismiss();
 
-              this.storage.set("checklist", this.list).then(() => {
-                loading.dismiss();
-                this.checklist = this.list;
-              }).catch(() => {
-                loading.dismiss();
-              });
+              } else {
+                this.list.push(this.check);
+
+                this.storage.set("checklist", this.list).then(() => { // checklist에 저장
+                  loading.dismiss();
+                  this.checklist = this.list;
+                  this.checklist_detail.push(this.check);
+                  this.checklist_detail = this.checklist_detail;
+
+                }).catch(() => {
+                  loading.dismiss();
+                });
+              }
             }).catch(() => {});
           } else {
             console.log("체크시간 확인해라");

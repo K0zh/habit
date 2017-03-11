@@ -30,17 +30,16 @@
   <ion-list inset style="margin-top:20px;">
     <ion-list-header>
       <p item-left>체크리스트</p>
-      <button ion-button icon-only item-right clear (click)="createCheck()">
-        <ion-icon name="md-add"></ion-icon>
-      </button>
     </ion-list-header>
-    <ion-item *ngFor="let item of checklistDetail" (click)="itemTapped($event, item)">
-         <h2>{{item.date}}</h2>
+    <ion-item *ngFor="let item of checklist_detail" (click)="itemTapped($event, item)">
+         <h2>{{item.date | date: 'yyyy-MM-dd HH:mm'}}</h2>
          <p>{{item.memo}}</p>
     </ion-item>
-    <ion-item *ngIf="!checklistDetail || checklistDetail.length < 1">
-      <h2>천리길도 한걸음 부터</h2>
-    </ion-item>
+
+    <button ion-button block (click)="createCheck()">
+      Check!
+    </button>
+
   </ion-list>
 
 </ion-content>

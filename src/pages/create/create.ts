@@ -23,7 +23,7 @@ export class CreatePage {
     public modalCtrl: ModalController
   ) {
     this.habit = {
-      key: 0,
+      key: 1,
       category: null,
       title: "",
       mon: false,
@@ -43,7 +43,7 @@ export class CreatePage {
   createHabit() {
     this.storage.get("habitList").then((list) => {
       if(list !== null) {
-        this.habit.key = (list.length + 1);
+        this.habit.key = list[list.length - 1].key + 1;
         this.list = list;
       }
 
