@@ -1,7 +1,7 @@
 {
   "name": "habit",
   "author": "breadnine",
-  "homepage": "http://ionicframework.com/",
+  "homepage": "",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
