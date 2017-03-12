@@ -31,7 +31,7 @@ export class MyApp {
       } else {
         this.rootPage = ListPage;
       }
-    })
+    });
 
     this.initializeApp();
 
