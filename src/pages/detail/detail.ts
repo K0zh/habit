@@ -86,6 +86,18 @@ export class DetailPage {
       {
         text: '삭제',
         handler: () => {
+          // let checklist_delete = []
+          // this.storage.get("checklist").then((checklist) => {
+          //   for(let i = 0; i < checklist.length; i++) {
+          //     console.log(checklist[i].parent);
+          //     if(checklist[i].parent === this.detailItem.key) {
+          //       checklist_delete.splice(i, 1);
+          //     }
+          //   }
+          // }).catch(() => {
+          //
+          // });
+
           let habitList = [];
           this.storage.get("habitList").then((list) => {
             habitList = list;
@@ -150,6 +162,8 @@ export class DetailPage {
 
                 this.checklist = checklist;
                 this.checklist_detail = [];
+
+                console.log(this.checklist_detail);
                 for(let i = 0; i < checklist.length; i++) {
                   console.log(checklist[i].parent);
                   if(checklist[i].parent === this.detailItem.key) {
@@ -161,7 +175,7 @@ export class DetailPage {
                 this.list = checklist;
 
                 if(this.checklist_detail.length > 0) {
-                const duplicateCheck = new Date(this.checklist_detail[this.checklist_detail.length - 1].date);
+                  const duplicateCheck = new Date(this.checklist_detail[this.checklist_detail.length - 1].date);
                   this.checkflag = Math.abs(duplicateCheck.getTime() - this.today.getTime())
                 }
 
@@ -186,11 +200,11 @@ export class DetailPage {
               } else {
                 this.list.push(this.check);
 
+                console.log(this.checklist_detail);
                 this.storage.set("checklist", this.list).then(() => { // checklist에 저장
                   loading.dismiss();
                   this.checklist = this.list;
                   this.checklist_detail.push(this.check);
-                  this.checklist_detail = this.checklist_detail;
 
                 }).catch(() => {
                   loading.dismiss();
