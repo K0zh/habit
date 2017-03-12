@@ -7,7 +7,7 @@ import { NavController, NavParams, ViewController } from 'ionic-angular';
   templateUrl: 'category.html'
 })
 export class CategoryPage {
-  categorys: any;
+  categorylist: Array<any> = [];
   selectedRadio: string;
   category: any;
 
@@ -16,7 +16,7 @@ export class CategoryPage {
     public navParams: NavParams,
     public viewCtrl: ViewController
   ) {
-    this.categorys = [
+    this.categorylist = [
       {
         en_name: 'excercise',
         ko_name: '운동',
@@ -61,9 +61,9 @@ export class CategoryPage {
 
   selectCategory() {
     let data = null;
-    for(let i = 0; i < this.categorys.length; i++) {
-      if(this.selectedRadio == this.categorys[i].en_name) {
-        data = this.categorys[i];
+    for(let i = 0; i < this.categorylist.length; i++) {
+      if(this.selectedRadio == this.categorylist[i].en_name) {
+        data = this.categorylist[i];
         break;
       }
     }
@@ -73,7 +73,6 @@ export class CategoryPage {
       } else {
         data.img_num = (Math.ceil(Math.random() * 4)).toString();
       }
-
       this.viewCtrl.dismiss(data);
     }
   }

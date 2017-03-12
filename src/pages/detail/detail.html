@@ -1,8 +1,5 @@
 <ion-header>
   <ion-navbar>
-    <!-- <button menuToggle *ngIf="!selectedItem">
-      <ion-icon name="menu"></ion-icon>
-    </button> -->
     <ion-title>버릇</ion-title>
   </ion-navbar>
 </ion-header>
@@ -28,19 +25,11 @@
   </ion-card>
 
   <ion-list inset style="margin-top:20px;">
-    <ion-list-header>
-      <p item-left>체크리스트</p>
-    </ion-list-header>
-    <button ion-button block (click)="createCheck()">
-      Check!
-    </button>
+    <button ion-button block (click)="createCheck()">기록하기</button>
     <ion-item *ngFor="let item of checklist_detail" (click)="itemTapped($event, item)">
          <h2>{{item.date | date: 'yyyy-MM-dd HH:mm'}}</h2>
          <p>{{item.memo}}</p>
     </ion-item>
-
-
-
   </ion-list>
 
 </ion-content>

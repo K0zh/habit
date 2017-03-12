@@ -12,19 +12,20 @@ import { CreatePage } from '../create/create';
   templateUrl: 'list.html'
 })
 export class ListPage {
-  icons: string[];
-  list: Array<{}>;
+  list: Array<{}> = [];
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public storage: Storage
   ) {
-    // If we navigated to this page, we will have an item available as a nav param
-    this.list = [];
     this.storage.get("habitList").then((list) => {
-      this.list = list;
-    }).catch(() => {});
+      if(list !== null) {
+        this.list = list;
+      }
+    }).catch(() => {
+      //TODO: 에러 Alert 작성
+    });
 
     // AdMob.createBanner({
     //   adId: 'ca-app-pub-4139703854678189/7032626151',

@@ -10,5 +10,4 @@ export class InformationPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
-
 }

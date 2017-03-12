@@ -3,26 +3,27 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { MyApp } from './app.component';
+import { GuidePage } from '../pages/guide/guide';
 import { ListPage } from '../pages/list/list';
 import { CreatePage } from '../pages/create/create';
 import { DetailPage } from '../pages/detail/detail';
-import { SettingPage } from '../pages/setting/setting';
-import { GuidePage } from '../pages/guide/guide';
 import { UpdatePage } from '../pages/update/update';
-import { InformationPage } from '../pages/information/information';
 import { CategoryPage } from '../pages/category/category';
+import { SettingPage } from '../pages/setting/setting';
+import { InformationPage } from '../pages/information/information';
+
 
 @NgModule({
   declarations: [
     MyApp,
+    GuidePage,
     ListPage,
     CreatePage,
     DetailPage,
-    SettingPage,
-    GuidePage,
     UpdatePage,
-    InformationPage,
-    CategoryPage
+    CategoryPage,
+    SettingPage,
+    InformationPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -30,14 +31,14 @@ import { CategoryPage } from '../pages/category/category';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
+    GuidePage,
     ListPage,
     CreatePage,
     DetailPage,
-    SettingPage,
-    GuidePage,
     UpdatePage,
-    InformationPage,
-    CategoryPage
+    CategoryPage,
+    SettingPage,
+    InformationPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Storage]
 })

@@ -25,12 +25,13 @@ export class GuidePage {
         };
       }
     });
-
   }
 
   continueTapped(event) {
     this.storage.set("settings", this.settings).then(() => {
       this.navCtrl.setRoot(ListPage);
-    }).catch(() => {});
+    }).catch(() => {
+      //TODO: 에러 Alert 작성
+    });
   }
 }
