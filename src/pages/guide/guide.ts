@@ -17,10 +17,15 @@ export class GuidePage {
     public navParams: NavParams,
     public storage: Storage
   ) {
-    this.settings = {
-      guide: false,
-      notification: false
-    }
+    storage.get("settings").then((val) => {
+      if(val === null || val === undefined) {
+        this.settings = {
+          guide: false,
+          notification: false
+        };
+      }
+    });
+
   }
 
   continueTapped(event) {

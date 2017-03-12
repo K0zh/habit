@@ -5,6 +5,8 @@ import { Storage } from '@ionic/storage';
 import * as moment from 'moment';
 
 import { CategoryPage } from '../category/category';
+import { ListPage } from '../list/list';
+
 
 @Component({
   selector: 'page-update',
@@ -13,6 +15,7 @@ import { CategoryPage } from '../category/category';
 export class UpdatePage {
   list: Array<{}> = [];
   habit: any;
+  param_data: any;
 
   constructor(
     public navCtrl: NavController,
@@ -21,7 +24,33 @@ export class UpdatePage {
     public loadingCtrl: LoadingController,
     public modalCtrl: ModalController
   ) {
-    this.habit = navParams.get('item');
+    this.param_data = navParams.get('item');
+
+    this.habit = {
+      key: 1,
+      category: null,
+      title: "",
+      mon: false,
+      tue: false,
+      wed: false,
+      thu: false,
+      fri: false,
+      sat: false,
+      sun: false,
+      week: "",
+      times: "12:00",
+      times_LT: "12:00 PM",
+      push: true
+    };
+
+    this.storage.get("habitList").then((list) => {
+      for(let i = 0; i < list.length; i++) {
+        if(this.param_data.key === list[i].key) {
+          this.habit = list[i];
+          break;
+        }
+      }
+    });
   }
 
   updateHabit() {
@@ -70,9 +99,9 @@ export class UpdatePage {
       });
       loading.present();
 
-      this.storage.set("habitList", this.list).then(() => {
+      this.storage.set("habitList", this.list).then((list) => {
         loading.dismiss();
-        this.navCtrl.pop();
+        this.navCtrl.setRoot(ListPage, null, {animate:true});
       }).catch(() => {
         loading.dismiss();
       });
