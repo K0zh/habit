@@ -12,7 +12,7 @@
 
 <ion-content text-center class="icons-page">
   <ion-list radio-group [(ngModel)]="selectedRadio">
-    <ion-item *ngFor="let category of categorys">
+    <ion-item *ngFor="let category of categorylist">
       <i class="fa fa-lg {{category.icon}}" item-left></i>
       <ion-label>{{category.ko_name}}</ion-label>
       <ion-radio value="{{category.en_name}}" (ionSelect)="selectCategory()"></ion-radio>
