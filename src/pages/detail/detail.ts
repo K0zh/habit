@@ -131,10 +131,9 @@ export class DetailPage {
       {
         text: '확인',
         handler: data => {
-          const TEN_MINUTES_MIN = 600;
-          const TEN_MINUTES_SEC = 600000;
+          const TEN_MINUTES = 600;
           //체크리스트 저장
-          if(this.checkTime < TEN_MINUTES_MIN) {
+          if(this.checkTime < TEN_MINUTES) {
             this.storage.get("checklist").then((checklist) => {
               const loading = this.loadingCtrl.create({
                 content: '저장 중...'
@@ -160,14 +159,14 @@ export class DetailPage {
                   this.checkflag = Math.abs(duplicateCheck.getTime() - this.today.getTime())
                 }
               } else {
-                this.checkflag = (TEN_MINUTES_SEC + 1); //첫번째 체크시 무조건 등록
+                this.checkflag = ((TEN_MINUTES * 100) + 1); //첫번째 체크시 무조건 등록
               }
 
               this.check.parent_key = this.detailItem.key;
               this.check.memo = data.memo;
               this.check.date = moment().format();
 
-              if(this.checkflag < TEN_MINUTES_SEC) { // 마지막 체크가 10분 이하일 경우
+              if(this.checkflag < (TEN_MINUTES * 100)) { // 마지막 체크가 10분 이하일 경우
                 let alert = this.alertCtrl.create({
                   subTitle: '오늘은 이미 기록했어요',
                   buttons: ['확인']
