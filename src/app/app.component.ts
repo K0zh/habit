@@ -25,7 +25,7 @@ export class MyApp {
     public storage: Storage
   ) {
     storage.get("settings").then((val) => {
-      if(val === null || val.guide) {
+      if(val === null || val === undefined || val.guide) {
         this.rootPage = GuidePage;
       } else {
         this.rootPage = ListPage;
@@ -35,7 +35,7 @@ export class MyApp {
     this.initializeApp();
 
     this.pages = [
-      { title: '버릇 등록', component: CreatePage, icon: 'md-add'},
+      { title: '새 버릇 만들기', component: CreatePage, icon: 'md-add'},
       { title: '설정', component: SettingPage, icon: 'settings' },
       { title: '가이드 보기', component: GuidePage, icon: 'book' },
       { title: '버릇 정보', component: InformationPage, icon: 'information-circle' }

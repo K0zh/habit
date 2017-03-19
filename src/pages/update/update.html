@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>버릇수정하기</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>{{param_data.title}} 수정하기</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="updateHabit()">
         <ion-icon name="md-checkmark"></ion-icon>
@@ -14,20 +14,20 @@
     <ion-item-divider color="light">카테고리</ion-item-divider>
     <a ion-item (click)="openCategoryModal(habit.category.en_name)">
       <span *ngIf="!habit.category">선택</span>
-      <i *ngIf="habit.category" class="fa {{habit.category.icon}}" item-left></i>
+      <!-- <i *ngIf="habit.category" class="fa {{habit.category.icon}}" item-left></i> -->
       <span *ngIf="habit.category">{{habit.category.ko_name}}</span>
     </a>
   </ion-item-group>
 
   <ion-item-group>
-    <ion-item-divider color="light">버릇 제목</ion-item-divider>
+    <ion-item-divider color="light">버릇 이름</ion-item-divider>
     <ion-item>
-      <ion-input type="text" placeholder="제목" [(ngModel)]="habit.title"></ion-input>
+      <ion-input type="text" placeholder="버릇 이름을 입력해주세요" [(ngModel)]="habit.title"></ion-input>
     </ion-item>
   </ion-item-group>
 
   <ion-item-group>
-    <ion-item-divider color="light">반복 요일 선택</ion-item-divider>
+    <ion-item-divider color="light">반복 요일</ion-item-divider>
     <ion-item>
       <ion-label>월요일</ion-label>
       <ion-checkbox color="primary" [(ngModel)]="habit.mon"></ion-checkbox>
@@ -62,10 +62,7 @@
     <ion-item-divider color="light">알림 시간</ion-item-divider>
     <ion-item>
       <ion-label>시간 선택</ion-label>
-      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A"
-        [(ngModel)]="habit.times"
-        doneText="확인"
-        cancelText="취소">
+      <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" [(ngModel)]="habit.times" cancelText="취소" doneText="확인">
       </ion-datetime>
     </ion-item>
   </ion-item-group>
@@ -73,7 +70,7 @@
   <ion-item-group>
     <ion-item-divider color="light">푸시 알림</ion-item-divider>
     <ion-item>
-      <ion-label>푸시 여부를 설정합니다</ion-label>
+      <ion-label>알림 여부를 설정합니다</ion-label>
       <ion-toggle checked="true" [(ngModel)]="habit.push"></ion-toggle>
     </ion-item>
   </ion-item-group>

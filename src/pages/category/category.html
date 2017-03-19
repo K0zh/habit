@@ -1,8 +1,8 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-buttons start>
-      <button ion-button (click)="dismiss()">
-        <span ion-text color="primary" showWhen="ios">취소</span>
+      <button ion-button color="white" (click)="dismiss()">
+        <span ion-text showWhen="ios">취소</span>
         <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
       </button>
     </ion-buttons>
@@ -13,7 +13,7 @@
 <ion-content text-center class="icons-page">
   <ion-list radio-group [(ngModel)]="selectedRadio">
     <ion-item *ngFor="let category of categorylist">
-      <i class="fa fa-lg {{category.icon}}" item-left></i>
+      <!-- <i class="fa fa-lg {{category.icon}}" item-left></i> -->
       <ion-label>{{category.ko_name}}</ion-label>
       <ion-radio value="{{category.en_name}}" (ionSelect)="selectCategory()"></ion-radio>
     </ion-item>

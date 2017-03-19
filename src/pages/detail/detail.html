@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>{{detailItem.title}}</ion-title>
   </ion-navbar>
 </ion-header>
@@ -7,12 +7,19 @@
 <ion-content>
   <ion-card>
     <ion-item>
-      <i class="fa fa-lg {{detailItem.category.icon}}" item-left style="margin-right: 16px;"></i>
-      <h2>{{detailItem.title}}</h2>
+      <!-- <i class="fa fa-lg {{detailItem.category.icon}}" item-left style="margin-right: 16px;"></i> -->
+      <h1>{{detailItem.title}}</h1>
+      <h2 item-right color="primary">{{checklist_detail.length}} 회</h2>
       <p>{{detailItem.week}}</p>
-      <ion-note item-right>{{detailItem.times_LT}}</ion-note>
+      <p>{{detailItem.times_LT}}</p>
+      <button ion-button clear icon-only item-right color="grey" (click)="updateTapped($event, detailItem)">
+        <ion-icon ios="ios-create-outline" md="md-create"></ion-icon>
+      </button>
+      <button ion-button clear icon-only item-right color="grey" (click)="deleteHabit()">
+        <ion-icon ios="ios-trash-outline" md="md-trash"></ion-icon>
+      </button>
     </ion-item>
-    <ion-item>
+    <!-- <ion-item>
       <ion-row>
         <ion-col width-50>
           <button ion-button block (click)="updateTapped($event, detailItem)">수정</button>
@@ -21,11 +28,11 @@
           <button ion-button block outline (click)="deleteHabit()">삭제</button>
         </ion-col>
       </ion-row>
-    </ion-item>
+    </ion-item> -->
   </ion-card>
 
   <ion-list inset style="margin-top:20px;">
-    <button ion-button block (click)="createCheck()">기록하기</button>
+    <button ion-button round block (click)="createCheck()">기록하기</button>
     <ion-item *ngFor="let item of checklist_detail" (click)="itemTapped($event, item)">
          <h2>{{item.date | date: 'yyyy-MM-dd HH:mm'}}</h2>
          <p>{{item.memo}}</p>

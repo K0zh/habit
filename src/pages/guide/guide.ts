@@ -23,7 +23,11 @@ export class GuidePage {
           guide: false,
           notification: false
         };
+      } else {
+        this.settings = val;
       }
+    }).catch(() => {
+      //TODO: 에러 Alert 작성
     });
   }
 
