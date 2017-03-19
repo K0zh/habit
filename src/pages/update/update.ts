@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, ModalController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ModalController, AlertController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import * as moment from 'moment';
 
@@ -21,7 +21,8 @@ export class UpdatePage {
     public navParams: NavParams,
     public storage: Storage,
     public loadingCtrl: LoadingController,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    public alertCtrl: AlertController
   ) {
     this.param_data = navParams.get('item');
 
@@ -55,62 +56,94 @@ export class UpdatePage {
   }
 
   updateHabit() {
-    this.storage.get("habitList").then((list) => {
-      if(list !== null) {
-        this.list = list;
-      }
-
-      /** 요일 표기 */
-      this.habit.week = "";
-      if(this.habit.mon) { this.habit.week += "월 "; }
-      if(this.habit.tue) { this.habit.week += "화 "; }
-      if(this.habit.wed) { this.habit.week += "수 "; }
-      if(this.habit.thu) { this.habit.week += "목 "; }
-      if(this.habit.fri) { this.habit.week += "금 "; }
-      if(this.habit.sat) { this.habit.week += "토 "; }
-      if(this.habit.sun) { this.habit.week += "일 "; }
-
-      let week = this.habit.week.replace(/ /gi, '');
-      if(week === "월화수목금토일") {
-        this.habit.week = "매일";
-      } else if(week === "월화수목금") {
-        this.habit.week = "주중";
-      } else if(week === "토일") {
-        this.habit.week = "주말";
-      } else if(week.length === 1) {
-        this.habit.week = week + "요일마다";
-      }
-
-      let index = 0;
-      for(let i = 0; i < list.length; i++) {
-        if(list[i].key === this.habit.key) {
-          index = i;
-          break;
-        }
-      }
-
-      /** 시간 표기 */
-      this.habit.times_LT = moment(this.habit.times, "HH:mm").format("LT");
-
-      /** 저장 */
-      this.list[index] = this.habit;
-
-      const loading = this.loadingCtrl.create({
-        content: '저장 중...'
+    if(this.habit.category === null) {
+      let alert = this.alertCtrl.create({
+        title: '알림',
+        subTitle: '카테고리를 선택해주세요',
+        buttons: ['확인']
       });
-      loading.present();
 
-      this.storage.set("habitList", this.list).then((list) => {
-        loading.dismiss();
-        this.navCtrl.setRoot(ListPage, null, {animate:true});
+      alert.present();
+    } else if(this.habit.title === null || this.habit.title === "") {
+      let alert = this.alertCtrl.create({
+        title: '알림',
+        subTitle: '제목을 입력해주세요',
+        buttons: ['확인']
+      });
+
+      alert.present();
+    } else if(this.habit.mon === false &&
+              this.habit.tue === false &&
+              this.habit.wed === false &&
+              this.habit.thu === false &&
+              this.habit.fri === false &&
+              this.habit.sat === false &&
+              this.habit.sun === false ) {
+      let alert = this.alertCtrl.create({
+        title: '알림',
+        subTitle: '요일을 선택해주세요',
+        buttons: ['확인']
+      });
+
+      alert.present();
+    } else {
+      this.storage.get("habitList").then((list) => {
+        if(list !== null) {
+          this.list = list;
+        }
+
+        /** 요일 표기 */
+        this.habit.week = "";
+        if(this.habit.mon) { this.habit.week += "월 "; }
+        if(this.habit.tue) { this.habit.week += "화 "; }
+        if(this.habit.wed) { this.habit.week += "수 "; }
+        if(this.habit.thu) { this.habit.week += "목 "; }
+        if(this.habit.fri) { this.habit.week += "금 "; }
+        if(this.habit.sat) { this.habit.week += "토 "; }
+        if(this.habit.sun) { this.habit.week += "일 "; }
+
+        let week = this.habit.week.replace(/ /gi, '');
+        if(week === "월화수목금토일") {
+          this.habit.week = "매일";
+        } else if(week === "월화수목금") {
+          this.habit.week = "주중";
+        } else if(week === "토일") {
+          this.habit.week = "주말";
+        } else if(week.length === 1) {
+          this.habit.week = week + "요일마다";
+        }
+
+        let index = 0;
+        for(let i = 0; i < list.length; i++) {
+          if(list[i].key === this.habit.key) {
+          index = i;
+            break;
+          }
+        }
+
+        /** 시간 표기 */
+        this.habit.times_LT = moment(this.habit.times, "HH:mm").format("LT");
+
+        /** 저장 */
+        this.list[index] = this.habit;
+
+        const loading = this.loadingCtrl.create({
+          content: '저장 중...'
+        });
+        loading.present();
+
+        this.storage.set("habitList", this.list).then((list) => {
+          loading.dismiss();
+          this.navCtrl.setRoot(ListPage, null, {animate:true});
+        }).catch(() => {
+          loading.dismiss();
+          //TODO: 에러 Alert 작성
+        });
+
       }).catch(() => {
-        loading.dismiss();
         //TODO: 에러 Alert 작성
       });
-
-    }).catch(() => {
-      //TODO: 에러 Alert 작성
-    });
+    }
   }
 
   openCategoryModal(category_en_name) {
