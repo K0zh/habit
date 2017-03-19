@@ -24,17 +24,34 @@ $font-path: "../assets/fonts";
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #387ef5,
+  //primary:    #387ef5,
+  primary:    #87BBA1,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222,
 
-  main:       #EB586F,
-  sub1:       #D8E9F0,
-  sub2:       #4AA0D5,
-  txt:        #454553
+  grey:       #888,
+  white:      #fff
+
+  /*
+  #87BBA1 연한 청록
+  #17574F 진한 청록
+  #EFC54B 노랑
+  #D4ADB6 연한 핑크
+  #EC85B1 진한 핑크
+  #2FB8E3 하늘
+  #8EC1DB 연한 하늘
+  #5982CF 진한 하늘
+  #0E88C5 진한 하늘2
+  #D13258 빨강
+  #FC6B91 핑크
+  #C04227 탁한 빨강
+  #A42927 진한 빨강
+  */
+
 );
+//$background-color: #eeeeee; //배경 fff 헤더배경 f9f9f9
 
 
 // App iOS Variables

@@ -38,7 +38,8 @@
     "cordova-plugin-console",
     "cordova-plugin-device",
     "cordova-plugin-splashscreen",
-    "ionic-plugin-keyboard"
+    "ionic-plugin-keyboard",
+    "cordova-sqlite-storage"
   ],
   "cordovaPlatforms": [],
   "description": "버릇: 버릇을 만드세요"

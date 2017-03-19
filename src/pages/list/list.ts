@@ -21,6 +21,14 @@ export class ListPage {
   ) {
     this.storage.get("habitList").then((list) => {
       if(list !== null) {
+        // 배열 역순 정렬
+        //list = list.reverse();
+
+        // key를 비교하여 key 내림차순 정렬
+        // list = list.sort(function (a, b) {
+        // 	return a.key < b.key ? 1 : a.key > b.key ? -1 : 0;
+        // });
+
         this.list = list;
       }
     }).catch(() => {
